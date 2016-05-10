@@ -3,6 +3,7 @@ from django.db.models.query import QuerySet
 from rest_framework import generics, exceptions
 from rest_framework.response import Response
 from cassandra.cqlengine import ValidationError
+from cassandra.cqlengine.query import DoesNotExist
 
 from .serializers import BlogSerializer
 from ..models import Blog
@@ -35,7 +36,7 @@ class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
         """
         try:
             return Blog.objects.get(blog_id=self.kwargs['uuid'])
-        except ValidationError:
+        except (ValidationError, DoesNotExist):
             raise exceptions.NotFound("No Blog found with this uuid")
 
     def update(self, request, *args, **kwargs):
