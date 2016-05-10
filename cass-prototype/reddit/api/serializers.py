@@ -22,7 +22,8 @@ class BlogSerializer(serializers.Serializer):
         return validated_data
 
     def update(self, instance, validated_data):
-        validated_data = self._validate_created_at(validated_data)  # Clean data
+        if validated_data.get('created_at', None):
+            validated_data = self._validate_created_at(validated_data)  # Clean data
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
