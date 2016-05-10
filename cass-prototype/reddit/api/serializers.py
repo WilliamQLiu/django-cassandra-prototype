@@ -29,3 +29,17 @@ class BlogSerializer(serializers.Serializer):
             setattr(instance, attr, value)
         instance.save()
         return instance
+
+
+class AddressSerializer(serializers.Serializer):
+    street = serializers.CharField()
+    zipcode = serializers.IntegerField()
+    email = serializers.EmailField()
+
+
+class UserSerializer(serializers.Serializer):
+    user_id = serializers.UUIDField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
+    todo_list = serializers.ListField()
+    #addr = serializers.  # TODO: Look into how to serialize a UserDefinedType

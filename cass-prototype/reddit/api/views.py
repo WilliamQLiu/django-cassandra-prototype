@@ -5,8 +5,8 @@ from rest_framework.response import Response
 from cassandra.cqlengine import ValidationError
 from cassandra.cqlengine.query import DoesNotExist
 
-from .serializers import BlogSerializer
-from ..models import Blog
+from .serializers import BlogSerializer, UserSerializer
+from ..models import Blog, User
 
 
 class BlogListCreate(generics.ListCreateAPIView):
@@ -49,3 +49,15 @@ class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
+
+
+class UserListCreate(generics.ListCreateAPIView):
+    serializer_class = UserSerializer
+    queryset = User.objects.all()
+
+    def get_queryset(self):
+        queryset = self.queryset
+        if isinstance(queryset, QuerySet):
+            # Ensure queryset is re-evaluated on each request.
+            queryset = queryset.all()
+        return queryset
