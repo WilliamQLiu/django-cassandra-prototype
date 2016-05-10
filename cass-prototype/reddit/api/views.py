@@ -1,7 +1,7 @@
 from django.db.models.query import QuerySet
 
-from rest_framework import generics
-from rest_framework import exceptions
+from rest_framework import generics, exceptions
+from rest_framework.response import Response
 from cassandra.cqlengine import ValidationError
 
 from .serializers import BlogSerializer
@@ -14,6 +14,7 @@ class BlogListCreate(generics.ListCreateAPIView):
 
     def get_queryset(self):
         """
+        GET a list of Blogs
         Need to explicitly define get_queryset for Cassandra to find
         """
         queryset = self.queryset
@@ -28,11 +29,22 @@ class BlogDetail(generics.RetrieveUpdateDestroyAPIView):
 
     def get_object(self):
         """
+        GET on a single Blog
         Example: /api/reddit/blog/fdd0ba00-13b2-11e6-88a9-0002a5d5c51e/
         Assuming a uuid = fdd0ba00-13b2-11e6-88a9-0002a5d5c51e
         """
         try:
-            blog_obj = Blog.objects.get(blog_id=self.kwargs['uuid'])
-            return blog_obj
+            return Blog.objects.get(blog_id=self.kwargs['uuid'])
         except ValidationError:
             raise exceptions.NotFound("No Blog found with this uuid")
+
+    def update(self, request, *args, **kwargs):
+        """
+        PUT on a single Blog
+        """
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        return Response(serializer.data)
