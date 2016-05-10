@@ -10,8 +10,7 @@ class BlogSerializer(serializers.Serializer):
     description = serializers.CharField()
 
     def create(self, validated_data):
-        # Taken from:
-        # http://www.cdrf.co/3.3/rest_framework.serializers/ModelSerializer.html
+        # Taken from: http://www.cdrf.co/3.3/rest_framework.serializers/ModelSerializer.html
         return Blog.objects.create(**validated_data)
 
     def update(self, instance, validated_data):
