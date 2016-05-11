@@ -95,9 +95,11 @@ class CassObj(object):
         max_time = datetime(2017, 1, 1)
 
         queryset_filter = Post.objects.filter(
+            id='312756e2-0ad6-465f-be8c-7d9a35c0fa20',
             post_id__gt=MinTimeUUID(min_time),
             post_id__lt=MaxTimeUUID(max_time))
         for post in queryset_filter:
+            print "SUCCESS"
             print(post)
 
 
@@ -109,4 +111,4 @@ if __name__ == '__main__':
     # cass1.get_table_metadata()
     #cass1.query_blogs()
     cass1.create_posts()
-    #cass1.query_posts()  # Not working
+    cass1.query_posts()  # Not working

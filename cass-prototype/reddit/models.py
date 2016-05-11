@@ -42,6 +42,7 @@ class Blog(models.Model):
 
 class Post(models.Model):
     """ A Post inside a Blog/Subreddit """
+    id = columns.UUID(partition_key=True, default=uuid.uuid4)
     post_id = columns.TimeUUID(primary_key=True)
     blog_id = columns.UUID()
     created_at = columns.DateTime()
