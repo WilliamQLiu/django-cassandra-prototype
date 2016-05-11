@@ -14,7 +14,6 @@ class Address(usertype.UserType):
     """ Custom field: Address """
     street = columns.Text(required=True)
     zipcode = columns.Integer()
-    email = columns.Text()
 
     def validate(self):
         super(Address, self).validate()
@@ -43,8 +42,8 @@ class Blog(models.Model):
 
 class Post(models.Model):
     """ A Post inside a Blog/Subreddit """
-    post_id = columns.TimeUUID(primary_key=True, partition_key=True)
-    blog_id = columns.UUID(partition_key=True)
+    post_id = columns.TimeUUID(primary_key=True)
+    blog_id = columns.UUID()
     created_at = columns.DateTime()
     post_title = columns.Text()
     content = columns.Text()
