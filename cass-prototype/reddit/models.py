@@ -29,6 +29,7 @@ class User(models.Model):
     addr = columns.UserDefinedType(Address)
     todo_list = columns.List(columns.Text)
     favorite_restaurant = columns.Map(columns.Text, columns.Text)
+    friends = columns.Map(columns.Text, columns.Integer)
     favorite_numbers = columns.Set(columns.Integer)
 
 

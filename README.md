@@ -11,7 +11,7 @@ This is a sample project that integrates [Django](https://www.djangoproject.com/
 
 ## Run Cassandra on Docker and run Django
 
-    docker run —name cassandra -p 9042:9042 -d cassandra  # Run Cassandra on port 9042 as background process
+    docker run --name cassandra -p 9042:9042 -d cassandra  # Run Cassandra on port 9042 as background process
     python manage.py sync_cassandra  # Sync Cassandra database
     python manage.py runserver  # Run Django Server
 
@@ -21,6 +21,10 @@ Go to the links below:
 
     http://localhost:8000/api/reddit/blog/  # See the DRF API GUI
     http://localhost:8000/docs/  # Swagger Docs that show all DRF API endpoints
+
+See examples of how the API works:
+
+    python queries.py
 
 ## Contributors
 

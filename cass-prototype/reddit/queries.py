@@ -13,7 +13,7 @@ from cassandra.cqlengine.functions import MinTimeUUID, MaxTimeUUID
 #from cassandra.metadata import KeyspaceMetadata, TableMetadata
 from datetime import datetime
 
-from models import Blog, Post
+from models import Blog, Post, User
 
 pp = pprint.PrettyPrinter(indent=4)
 
@@ -72,6 +72,19 @@ class CassObj(object):
         for blog in queryset_will:
             print(blog)
 
+    def create_user(self):
+        """ Examples of creating a User """
+        sync_table(User)
+        self.user1 = User.create(
+            user_id=uuid.uuid1(),
+            first_name='Will',
+            last_name='Liu',
+            todo_list=['Laundry', 'Dishes', 'Cook'],
+            favorite_restaurant={'American': 'Sweet Afton', 'Indian': 'Seva'},
+            friends={'Wayne': 30, 'John': 33},
+            favorite_numbers=set([1, 1, 2, 3, 4, 6])
+            )
+
     def create_posts(self):
         sync_table(Post)
         self.post1 = Post.create(
@@ -79,14 +92,16 @@ class CassObj(object):
             blog_id='fdd0ba00-13b2-11e6-88a9-0002a5d5c51c',
             created_at=datetime.now(),
             post_title='I did it!',
-            content='Stuff goes in here'
+            content='Stuff goes in here',
+            tags=['Books', 'Movies', 'Audio']
         )
         self.post2 = Post.create(
             post_id=uuid.uuid1(),
             blog_id='fdd0ba00-13b2-11e6-88a9-0002a5d5c51c',
             created_at=datetime.now(),
             post_title='You did it!',
-            content='More stuff goes in here'
+            content='More stuff goes in here',
+            tags=set(['a', 'b', 'c', 'c'])
         )
 
     def query_posts(self):
@@ -110,5 +125,6 @@ if __name__ == '__main__':
     # cass1.get_keyspace_metadata()
     # cass1.get_table_metadata()
     #cass1.query_blogs()
-    cass1.create_posts()
-    cass1.query_posts()  # Not working
+    #cass1.create_posts()
+    #cass1.query_posts()
+    cass1.create_user()

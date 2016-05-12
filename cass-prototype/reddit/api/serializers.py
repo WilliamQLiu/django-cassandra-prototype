@@ -1,4 +1,4 @@
-from reddit.models import Blog, User, Address
+from reddit.models import Blog, User
 
 from rest_framework import serializers
 
@@ -36,14 +36,13 @@ class UserSerializer(serializers.Serializer):
     first_name = serializers.CharField()
     last_name = serializers.CharField()
     todo_list = serializers.ListField()
-    #addr = # TODO: Look into how to serialize a UserDefinedType
-    #favorite_restaurant =  # TODO: Look into how to serialize a Map
-    #favorite_numbers =  # TODO: Look into how to serialize a Set
 
     def create(self, validated_data):
         # Taken from: http://www.cdrf.co/3.3/rest_framework.serializers/ModelSerializer.html
         return User.objects.create(**validated_data)
 
-    # def to_internal_value(self, data):
-    #     favorite_numbers = data.get('favorite_numbers', None)
-    #     temp = favorite_numbers.split()
+    def validate(self, attrs):
+        # DO VALIDATION LOGIC HERE
+        # form_favorite_numbers = attrs['favorite_numbers']
+        # data = form_favorite_numbers[0]
+        return attrs
