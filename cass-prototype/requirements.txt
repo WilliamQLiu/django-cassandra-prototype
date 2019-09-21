@@ -43,7 +43,7 @@ python-memcached==1.53
 python-openid==2.2.5
 pytz==2016.4
 PyVirtualDisplay==0.1.5
-PyYAML==3.11
+PyYAML==5.1
 requests==2.10.0
 requests-oauthlib==0.6.1
 selenium==2.48.0
