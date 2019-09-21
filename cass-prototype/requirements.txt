@@ -16,7 +16,7 @@ django-filter==0.11.0
 django-pagination==1.0.7
 django-rest-swagger==0.3.6
 -e git+http://github.com/Tivix/django-userswitch.git@cf3a396269d9f998e1750da3ad7c9a7c60945e77#egg=django_userswitch_fork-dev
-djangorestframework==3.3.3
+djangorestframework==3.9.1
 EasyProcess==0.2.2
 enum34==1.1.4
 Fabric==1.9.1
