@@ -10,7 +10,7 @@ django-cassandra-engine==0.8.1
 django-common-helpers==0.7.0
 django-compressor==1.4
 django-cron==0.4.3
-django-debug-toolbar==1.2.1
+django-debug-toolbar==1.11.1
 django-extensions==1.6.6
 django-filter==0.11.0
 django-pagination==1.0.7
