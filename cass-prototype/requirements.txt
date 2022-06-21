@@ -28,7 +28,7 @@ ipdb==0.8
 ipython==2.2.0
 Markdown==2.6.2
 model-mommy==1.2.6
-numpy==1.11.0
+numpy==1.22.0
 oauthlib==1.1.1
 pandas==0.18.1
 paramiko==2.0.0
